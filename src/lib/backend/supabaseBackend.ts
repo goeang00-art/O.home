@@ -219,18 +219,11 @@ async updateProfile(patch) {
       return n;
     },
 
-   subscribe(coll, onChange) {
-  const ch = sb.channel(`ohome:${coll}:${crypto.randomUUID()}`)
-    .on('postgres_changes', {
-      event: '*',
-      schema: 'public',
-      table: coll
-    }, () => onChange())
-    .subscribe();
-
-  return () => {
-    void sb.removeChannel(ch);
-  };
+subscribe(coll, onChange) { 
+  const ch = sb.channel(`ohome:${coll}:${crypto.randomUUID()}`) 
+    .on('postgres_changes', { event: '*', schema: 'public', table: coll }, () => onChange()) 
+    .subscribe(); 
+  return () => { void sb.removeChannel(ch); }; 
 },
 
     async fetchSetting<T>(key: string) {
