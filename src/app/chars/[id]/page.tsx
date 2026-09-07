@@ -26,6 +26,7 @@ function CharDetailInner() {
   const [chars, setChars, loaded] = useLocalList<Character>('ohome.chars.v1', CHAR_SEED);
   const [rels] = useLocalList<Relation>('ohome.rels.v1', REL_SEED);
   const { familyOf } = useFonts();
+  const [growthTab, setGrowthTab] = useState<'before' | 'after'>('before');
   // 큰 글씨 — 추가 섹션(창고캐 등)이면 그 이름, 눌렀을 때도 그 목록으로 (v2.0 사용자 제보)
   const tt = useSectionTitle('chars', chars.find(c => c.id === id)?.secId, 'CHARACTERS');
   const params = useSearchParams();
@@ -225,6 +226,26 @@ function CharDetailInner() {
                   리스트에서 맞춰 둔 위치와 다른 곳이 보였다 (대표 아트에만 적용) */}
               {/* 리스트 썸네일 크롭은 3:4 기준이라 여기(화면 높이에 따라 비율이 달라지는 영역)에는
                   맞지 않는다 — 여기서 따로 잡은 값이 있을 때만 쓰고, 없으면 가운데 기준 (v2.0) */}
+             <div style={{
+  display: 'flex',
+  justifyContent: 'center',
+  gap: 8,
+  marginBottom: 12,
+}}>
+  <button onClick={() => {
+    setGrowthTab('before');
+    setCur(0);
+  }}>
+    성장 전
+  </button>
+
+  <button onClick={() => {
+    setGrowthTab('after');
+    setCur(1);
+  }}>
+    성장 후
+  </button>
+</div>
               <CroppedBlobImg fileRef={arts[cur] ?? eff.artUrl}
                 crop={cur === 0 ? eff.artCrop : undefined}
                 ph={ch.thumbClass} label="CHARACTER FULL ART" />
