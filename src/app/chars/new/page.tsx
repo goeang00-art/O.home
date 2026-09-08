@@ -32,7 +32,7 @@ function CharNewInner() {
     <section className="page">
       <div className="page-head">
         <PageTitle href={tt.href}>{tt.title}</PageTitle>
-        <EditableDesc k="chars-new-desc" def="캐릭터 등록 — 아트 첫 장이 대표 · 탭 내용은 전용 편집 화면에서 작성" />
+        <EditableDesc k="chars-new-desc" def="캐릭터 등록 — 목록용 두상과 상세용 전신을 각각 등록 · 탭 내용은 전용 편집 화면에서 작성" />
       </div>
       <CharEditForm
         initial={null}
